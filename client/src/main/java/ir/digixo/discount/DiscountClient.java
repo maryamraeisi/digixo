@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface DiscountClient {
 
     @GetMapping("api/v1/discounts/{code}")
-    ResponseEntity<Discount> getDiscount(@PathVariable("code") String code);
+    ResponseEntity<DiscountRequest> getDiscount(@PathVariable("code") String code);
 }

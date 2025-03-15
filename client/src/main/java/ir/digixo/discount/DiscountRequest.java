@@ -5,15 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Discount {
+public class DiscountRequest {
     private Long id;
     private String code;
     private float percentage;
-    private LocalDate expirationDate;
+    private String expirationDate;
 }

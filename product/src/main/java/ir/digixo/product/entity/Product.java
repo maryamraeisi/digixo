@@ -1,6 +1,6 @@
 package ir.digixo.product.entity;
 
-import ir.digixo.product.dto.ProductRequest;
+import ir.digixo.product.ProductRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,8 +24,8 @@ public class Product {
     private BigDecimal price;
 
     public Product(ProductRequest productRequest, BigDecimal price) {
-        this.name = productRequest.name();
-        this.description = productRequest.description();
+        this.name = productRequest.getName();
+        this.description = productRequest.getDescription();
         this.price = price;
     }
 }

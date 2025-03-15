@@ -1,7 +1,7 @@
 package ir.digixo.product.controller;
 
 import ir.digixo.product.entity.Product;
-import ir.digixo.product.dto.ProductRequest;
+import ir.digixo.product.ProductRequest;
 import ir.digixo.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

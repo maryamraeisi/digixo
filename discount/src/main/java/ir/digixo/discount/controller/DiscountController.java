@@ -1,7 +1,7 @@
 package ir.digixo.discount.controller;
 
 import ir.digixo.discount.entity.Discount;
-import ir.digixo.discount.dto.DiscountRequest;
+import ir.digixo.discount.DiscountRequest;
 import ir.digixo.discount.service.DiscountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package ir.digixo.discount.service;
 
 import ir.digixo.discount.entity.Discount;
-import ir.digixo.discount.dto.DiscountRequest;
+import ir.digixo.discount.DiscountRequest;
 import ir.digixo.discount.repository.DiscountRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

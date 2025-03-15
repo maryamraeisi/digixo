@@ -1,6 +1,6 @@
 package ir.digixo.discount.entity;
 
-import ir.digixo.discount.dto.DiscountRequest;
+import ir.digixo.discount.DiscountRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,8 +27,8 @@ public class Discount {
     private LocalDate expirationDate;
 
     public Discount(DiscountRequest discountRequest) {
-        this.code = discountRequest.code();
-        this.percentage = discountRequest.percentage();
-        this.expirationDate = LocalDate.parse(discountRequest.expirationDate());
+        this.code = discountRequest.getCode();
+        this.percentage = discountRequest.getPercentage();
+        this.expirationDate = LocalDate.parse(discountRequest.getExpirationDate());
     }
 }

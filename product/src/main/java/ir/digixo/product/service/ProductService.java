@@ -1,15 +1,14 @@
 package ir.digixo.product.service;
 
-import ir.digixo.discount.Discount;
+import ir.digixo.discount.DiscountRequest;
 import ir.digixo.discount.DiscountClient;
 import ir.digixo.notification.NotificationClient;
 import ir.digixo.notification.NotificationRequest;
 import ir.digixo.product.entity.Product;
-import ir.digixo.product.dto.ProductRequest;
+import ir.digixo.product.ProductRequest;
 import ir.digixo.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -36,8 +35,8 @@ public class ProductService {
     }
 
     private BigDecimal calculatePrice(ProductRequest productRequest) {
-        if (productRequest.discountCode() == null) {
-            return productRequest.price();
+        if (productRequest.getDiscountCode() == null) {
+            return productRequest.getPrice();
         }
         return calculatePriceAfterDiscount(productRequest);
     }
@@ -53,9 +52,9 @@ public class ProductService {
 //                .block();
 
         // OpenFeign
-        Discount discount = discountClient.getDiscount(productRequest.discountCode()).getBody();
+        DiscountRequest discountRequest = discountClient.getDiscount(productRequest.discountCode()).getBody();
 
-        BigDecimal payingPercentage = BigDecimal.valueOf(100.0 - discount.getPercentage()).divide(new BigDecimal(100));
+        BigDecimal payingPercentage = BigDecimal.valueOf(100.0 - discountRequest.getPercentage()).divide(new BigDecimal(100));
         BigDecimal finalPrice = productRequest.price().multiply(payingPercentage);
         return finalPrice;
     }
