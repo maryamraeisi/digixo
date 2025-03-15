@@ -52,10 +52,10 @@ public class ProductService {
 //                .block();
 
         // OpenFeign
-        DiscountRequest discountRequest = discountClient.getDiscount(productRequest.discountCode()).getBody();
+        DiscountRequest discountRequest = discountClient.getDiscount(productRequest.getDiscountCode()).getBody();
 
         BigDecimal payingPercentage = BigDecimal.valueOf(100.0 - discountRequest.getPercentage()).divide(new BigDecimal(100));
-        BigDecimal finalPrice = productRequest.price().multiply(payingPercentage);
+        BigDecimal finalPrice = productRequest.getPrice().multiply(payingPercentage);
         return finalPrice;
     }
 
