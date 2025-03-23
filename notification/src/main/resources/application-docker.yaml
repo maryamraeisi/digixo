@@ -1,0 +1,19 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://postgres:5432/digixo
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  application:
+    name: notification
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:8761/eureka

@@ -10,7 +10,8 @@
     <artifactId>eureka</artifactId>
     <packaging>jar</packaging>
 
-    <name>eurika</name>
+    <name>eureka</name>
+    <version>mine</version>
     <url>http://maven.apache.org</url>
 
     <properties>

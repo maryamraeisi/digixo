@@ -1,0 +1,94 @@
+services:
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=digixo
+    volumes:
+      - digixo:/var/lib/postgresql/data
+
+
+  eureka:
+    image: digixo/eureka:mine
+    container_name: eureka
+    ports:
+      - "8761:8761"
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+
+  product:
+    image: digixo/product:mine
+    container_name: product
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+       - eureka
+       - postgres
+
+
+  discount:
+    image: digixo/discount:mine
+    container_name: discount
+    ports:
+      - "8085:8085"
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - eureka
+      - postgres
+
+
+  notification:
+    image: digixo/notification:mine
+    container_name: notification
+    ports:
+      - "8082:8082"
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - eureka
+      - postgres
+
+
+  gateway:
+    image: digixo/gateway:mine
+    container_name: gateway
+    ports:
+      - "7070:7070"
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - eureka
+
+volumes:
+  digixo:
+    name: digixo
+    driver: local

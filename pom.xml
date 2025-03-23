@@ -68,7 +68,16 @@
                     <target>21</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.4</version>
+                <configuration>
+                    <to>
+                        <image>digixo/${artifactId}:${version}</image>
+                    </to>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>
