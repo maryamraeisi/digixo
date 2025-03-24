@@ -5,9 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient("NOTIFICATION")
+//@FeignClient("NOTIFICATION") // changed to event driven call
 public interface NotificationClient {
 
-    @PostMapping("api/v1/notifications")
+//    @PostMapping("api/v1/notifications")
     ResponseEntity<Void> sendNotification(@RequestBody NotificationRequest notificationRequest);
 }

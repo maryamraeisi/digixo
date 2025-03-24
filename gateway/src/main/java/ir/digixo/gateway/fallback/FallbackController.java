@@ -11,8 +11,4 @@ public class FallbackController {
         return "Product service is down";
     }
 
-    @RequestMapping("/discount-fallback")
-    public String discountFallback() {
-        return "discount service is down";
-    }
 }

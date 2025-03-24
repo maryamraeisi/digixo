@@ -3,9 +3,11 @@ package ir.digixo.product;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@EnableFeignClients(basePackages = {"ir.digixo.discount", "ir.digixo.notification"})
+@EnableFeignClients(basePackages = {"ir.digixo.discount"})
+@ComponentScan(basePackages = {"ir.digixo.rabbitmq", "ir.digixo.product", "ir.digixo.discount"})
 public class ProductApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProductApplication.class, args);

@@ -7,7 +7,9 @@ import ir.digixo.notification.NotificationRequest;
 import ir.digixo.product.entity.Product;
 import ir.digixo.product.ProductRequest;
 import ir.digixo.product.repository.ProductRepository;
+import ir.digixo.rabbitmq.producer.RabbitMQMessageProducer;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -20,7 +22,12 @@ public class ProductService {
     private final ProductRepository productRepository;
 //    private final WebClient.Builder builder;
     private final DiscountClient discountClient;
-    private final NotificationClient notificationClient;
+//    private final NotificationClient notificationClient;
+    private final RabbitMQMessageProducer rabbitMQMessageProducer;
+    @Value(value = "${rabbitmq.exchange}")
+    private String PRODUCT_EXCHANGE;
+    @Value(value = "${rabbitmq.routing-key}")
+    private String PRODUCT_NOTIFICATION_ROUTING_KEY;
 
     public Product createProduct(ProductRequest productRequest) {
         BigDecimal price = calculatePrice(productRequest);
@@ -61,6 +68,7 @@ public class ProductService {
 
     private void sendNotification(Long productId) {
         NotificationRequest notificationRequest = new NotificationRequest(productId, String.format("product with id %s is created.", productId));
-        notificationClient.sendNotification(notificationRequest);
+//        notificationClient.sendNotification(notificationRequest);
+        rabbitMQMessageProducer.publish(PRODUCT_EXCHANGE, PRODUCT_NOTIFICATION_ROUTING_KEY, notificationRequest);
     }
 }
