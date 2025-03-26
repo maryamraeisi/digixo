@@ -16,11 +16,12 @@
         <module>notification</module>
         <module>gateway</module>
         <module>amqp</module>
+        <module>kafka</module>
     </modules>
 
     <properties>
-        <spring.boot.version>3.1.6</spring.boot.version>
-        <spring.cloud.version>2022.0.4</spring.cloud.version>
+        <spring.boot.version>3.4.4</spring.boot.version>
+        <spring.cloud.version>2024.0.1</spring.cloud.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

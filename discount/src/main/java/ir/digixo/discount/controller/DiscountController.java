@@ -20,7 +20,7 @@ public class DiscountController {
     }
 
     @GetMapping("{code}")
-    public ResponseEntity<Discount> getDiscount(@PathVariable String code) {
+    public ResponseEntity<Discount> getDiscount(@PathVariable("code") String code) {
         return ResponseEntity.ok(discountService.getDiscountByCode(code));
     }
 

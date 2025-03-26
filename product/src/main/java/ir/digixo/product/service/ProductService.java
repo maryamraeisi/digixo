@@ -7,9 +7,10 @@ import ir.digixo.notification.NotificationRequest;
 import ir.digixo.product.entity.Product;
 import ir.digixo.product.ProductRequest;
 import ir.digixo.product.repository.ProductRepository;
-import ir.digixo.rabbitmq.producer.RabbitMQMessageProducer;
+//import ir.digixo.rabbitmq.producer.RabbitMQMessageProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -22,12 +23,16 @@ public class ProductService {
     private final ProductRepository productRepository;
 //    private final WebClient.Builder builder;
     private final DiscountClient discountClient;
-//    private final NotificationClient notificationClient;
-    private final RabbitMQMessageProducer rabbitMQMessageProducer;
-    @Value(value = "${rabbitmq.exchange}")
-    private String PRODUCT_EXCHANGE;
-    @Value(value = "${rabbitmq.routing-key}")
-    private String PRODUCT_NOTIFICATION_ROUTING_KEY;
+
+//    private final NotificationClient notificationClient; //changed to event driven style
+
+//    private final RabbitMQMessageProducer rabbitMQMessageProducer; //changed to using kafka
+//    @Value(value = "${rabbitmq.exchange}")
+//    private String PRODUCT_EXCHANGE;
+//    @Value(value = "${rabbitmq.routing-key}")
+//    private String PRODUCT_NOTIFICATION_ROUTING_KEY;
+
+    private final KafkaTemplate<String, NotificationRequest> kafkaTemplate;
 
     public Product createProduct(ProductRequest productRequest) {
         BigDecimal price = calculatePrice(productRequest);
@@ -69,6 +74,9 @@ public class ProductService {
     private void sendNotification(Long productId) {
         NotificationRequest notificationRequest = new NotificationRequest(productId, String.format("product with id %s is created.", productId));
 //        notificationClient.sendNotification(notificationRequest);
-        rabbitMQMessageProducer.publish(PRODUCT_EXCHANGE, PRODUCT_NOTIFICATION_ROUTING_KEY, notificationRequest);
+
+//        rabbitMQMessageProducer.publish(PRODUCT_EXCHANGE, PRODUCT_NOTIFICATION_ROUTING_KEY, notificationRequest);
+
+        kafkaTemplate.send("product4", notificationRequest);
     }
 }
