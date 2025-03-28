@@ -30,8 +30,16 @@ management:
   info:
     env:
       enabled: true
+    health:
+      probes:
+        enabled: true
+  health:
+    circuitbreakers:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 info:
   app:
     name: "gateway"
-

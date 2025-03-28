@@ -21,3 +21,28 @@ eureka:
 rabbitmq:
   exchange: product-exchange
   routing-key: product.notification.routing-key
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    info:
+      enabled: true
+    gateway:
+      enabled: true
+    health:
+      show-details: always
+  info:
+    env:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+  health:
+    circuitbreakers:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}

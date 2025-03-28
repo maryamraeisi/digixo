@@ -17,3 +17,28 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    info:
+      enabled: true
+    gateway:
+      enabled: true
+    health:
+      show-details: always
+  info:
+    env:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+  health:
+    circuitbreakers:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}

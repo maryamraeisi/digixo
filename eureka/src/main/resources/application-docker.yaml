@@ -1,25 +1,16 @@
 server:
-  port: 8082
+  port: 8761
 
 spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: postgres
-    url: jdbc:postgresql://postgres:5432/digixo
-  jpa:
-    hibernate:
-      ddl-auto: update
-
   application:
-    name: notification
+    name: eureka
 eureka:
   client:
-    service-url:
-      defaultZone: http://eureka:8761/eureka
-
-rabbitmq:
-  queue: notification.queue
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    response-cache-update-interval-ms: 5000
+    wait-time-in-ms-when-sync-empty: 0
 
 management:
   endpoints:

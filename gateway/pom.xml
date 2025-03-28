@@ -7,10 +7,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>gateway</artifactId>
+    <artifactId>apigateway</artifactId>
     <packaging>jar</packaging>
 
-    <name>gateway</name>
+    <name>apigateway</name>
     <version>mine</version>
     <url>http://maven.apache.org</url>
 
