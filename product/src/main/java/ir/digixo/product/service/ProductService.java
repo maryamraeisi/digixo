@@ -46,6 +46,10 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).orElse(null);
+    }
+
     private BigDecimal calculatePrice(ProductRequest productRequest) {
         if (productRequest.getDiscountCode() == null) {
             return productRequest.getPrice();
@@ -79,4 +83,5 @@ public class ProductService {
 
         kafkaTemplate.send("product4", notificationRequest);
     }
+
 }

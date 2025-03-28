@@ -21,3 +21,18 @@ eureka:
 rabbitmq:
   exchange: product-exchange
   routing-key: product.notification.routing-key
+
+resilience4j:
+  retry:
+    configs:
+      default:
+        max-attempts: 3
+        wait-duration: 100
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+  ratelimiter:
+    configs:
+      default:
+        limit-refresh-period: 20000
+        limit-for-period: 5
+        timeout-duration: 1
